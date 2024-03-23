@@ -14,6 +14,7 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
+import { Link } from "react-router-dom"
 
 const components: { title: string; href: string; description: string }[] = [
   {
@@ -47,11 +48,11 @@ export function Navbar() {
     <NavigationMenu>
       <NavigationMenuList>
         <NavigationMenuItem>
-          <a className="flex justify-center items-center" href="/">
+          <Link className="flex justify-center items-center" to="/">
             <img src="/logo.png" alt="" className="h-14" />
             <h1 className="text-2xl font-bold ml-2">CricketAdda</h1>
 
-          </a>
+          </Link>
           
         </NavigationMenuItem>
         <NavigationMenuItem>
@@ -63,6 +64,7 @@ export function Navbar() {
                   key={component.title}
                   title={component.title}
                   href={component.href}
+                  className={""}
                 >
                   {component.description}
                 </ListItem>
@@ -71,11 +73,11 @@ export function Navbar() {
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <a href="/about"  >
+          <Link to="/about"  >
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
               About Us
             </NavigationMenuLink>
-          </a>
+          </Link>
         </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>
@@ -84,28 +86,26 @@ export function Navbar() {
 
 }
 
-const ListItem = React.forwardRef<
-  React.ElementRef<"a">,
-  React.ComponentPropsWithoutRef<"a">
->(({ className, title, children, ...props }, ref) => {
-  return (
-    <li>
-      <NavigationMenuLink asChild>
-        <a
-          ref={ref}
+const ListItem = React.forwardRef(
+  ({ className, title, children, href, ...rest }: { className: string; title: string; children: React.ReactNode; href: string; }, ref) => {
+    return (
+      <li>
+        <Link
+          to={href}
+          ref={ref as React.LegacyRef<HTMLAnchorElement>}
           className={cn(
             "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
             className
           )}
-          {...props}
+          {...rest}
         >
           <div className="text-sm font-medium leading-none">{title}</div>
           <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
             {children}
           </p>
-        </a>
-      </NavigationMenuLink>
-    </li>
-  )
-})
-ListItem.displayName = "ListItem"
+        </Link>
+      </li>
+    );
+  }
+);
+ListItem.displayName = "ListItem";
