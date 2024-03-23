@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins = "*"  )
 public class PlayerController {
     @Autowired
     private PlayerServiceImpl playerService;
@@ -41,9 +42,5 @@ public class PlayerController {
         System.out.println("PlayerController.updatePlayer");
         playerService.save(player);
     }
-
-
-
-
 
 }

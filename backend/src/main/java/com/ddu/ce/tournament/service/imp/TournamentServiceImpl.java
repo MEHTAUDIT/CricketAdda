@@ -1,7 +1,9 @@
 package com.ddu.ce.tournament.service.imp;
 
+import com.ddu.ce.tournament.dao.MatchDAO;
 import com.ddu.ce.tournament.dao.TeamDAO;
 import com.ddu.ce.tournament.dao.TournamentDAO;
+import com.ddu.ce.tournament.entity.Match;
 import com.ddu.ce.tournament.entity.Team;
 import com.ddu.ce.tournament.entity.Tournament;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +16,12 @@ public class TournamentServiceImpl implements com.ddu.ce.tournament.service.Tour
 
     private TournamentDAO tournamentDAO;
     private TeamDAO teamDAO;
-
+    private MatchDAO matchDAO;
     @Autowired
-    public TournamentServiceImpl(TournamentDAO tournamentDAO , TeamDAO teamDAO) {
+    public TournamentServiceImpl(TournamentDAO tournamentDAO , TeamDAO teamDAO , MatchDAO matchDAO) {
         this.tournamentDAO = tournamentDAO;
         this.teamDAO = teamDAO;
+        this.matchDAO = matchDAO;
     }
 
     public TournamentDAO getTournamentDAO() {
@@ -66,6 +69,21 @@ public class TournamentServiceImpl implements com.ddu.ce.tournament.service.Tour
         return tournament.getTeams();
     }
 
+    public List<Match> getMatches(int tournament_id) {
+        Tournament tournament = findById(tournament_id);
+        List<Match> matches = matchDAO.findByTournament_Id(tournament_id);
+        return matches;
+    }
 
+    public void addMatchToTournament(int tournament_id, int team1_id, int team2_id) {
+        Match match = new Match();
+        match.setTeam1(teamDAO.findById(team1_id).get());
+        match.setTeam2(teamDAO.findById(team2_id).get());
+        match.setMatch_status("upcoming");
+        match.setWinner(0);
+        match.setMatch_date( new java.util.Date());
+        match.setTournament(findById(tournament_id));
+        matchDAO.save(match);
+    }
 
 }

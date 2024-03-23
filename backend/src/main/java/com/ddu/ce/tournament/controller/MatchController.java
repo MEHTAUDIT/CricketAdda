@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins = "*"  )
 public class MatchController {
 
     @Autowired
@@ -48,6 +49,8 @@ public class MatchController {
         System.out.println("MatchController.updateMatch");
         matchService.save(match);
     }
+
+
 
 
 }

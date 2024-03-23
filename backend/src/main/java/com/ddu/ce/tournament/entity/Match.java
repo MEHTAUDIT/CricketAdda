@@ -2,6 +2,8 @@ package com.ddu.ce.tournament.entity;
 
 import jakarta.persistence.*;
 
+import java.util.Date;
+
 @Entity
 @Table(name = "tournament_match")
 public class Match {
@@ -12,13 +14,20 @@ public class Match {
 
     private String match_status;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "team1_id")
     private Team team1;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "team2_id")
     private Team team2;
+
+    @Temporal(TemporalType.DATE)
+    private Date match_date;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "tournament_id")
+    private Tournament tournament;
 
 
     private int winner;
@@ -62,6 +71,24 @@ public class Match {
     public void setWinner(int winner) {
         this.winner = winner;
     }
+
+    public Date getMatch_date() {
+        return match_date;
+    }
+
+    public void setMatch_date(Date match_date) {
+        this.match_date = match_date;
+    }
+
+    public Tournament getTournament() {
+        return tournament;
+    }
+
+    public void setTournament(Tournament tournament) {
+        this.tournament = tournament;
+    }
+
+
 
 
 }

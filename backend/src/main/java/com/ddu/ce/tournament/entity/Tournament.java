@@ -2,6 +2,7 @@ package com.ddu.ce.tournament.entity;
 
 import jakarta.persistence.*;
 
+import java.sql.Date;
 import java.util.List;
 
 @Entity
@@ -21,6 +22,10 @@ public class Tournament {
             inverseJoinColumns = @JoinColumn(name = "team_id")
     )
     private List<Team> teams;
+
+    private String start_date;
+
+
 
     public int getId() {
         return id;
@@ -52,5 +57,13 @@ public class Tournament {
 
     public void setTeams(List<Team> teams) {
         this.teams = teams;
+    }
+
+    public String getStart_date() {
+        return start_date;
+    }
+
+    public void setStart_date(String start_date) {
+        this.start_date = start_date;
     }
 }

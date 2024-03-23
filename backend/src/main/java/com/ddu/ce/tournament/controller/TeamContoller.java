@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins = "*"  )
 public class TeamContoller {
 
     @Autowired
@@ -46,13 +47,13 @@ public class TeamContoller {
         teamService.save(team);
     }
 
-    @GetMapping("team/addplayer/{team_id}/{player_id}")
+    @GetMapping("team/{team_id}/addplayer/{player_id}")
     public void addPlayerToTeam(@PathVariable int team_id, @PathVariable int player_id) {
 
         teamService.addPlayerToTeam(team_id, player_id);
     }
 
-    @GetMapping("team/players/{team_id}")
+    @GetMapping("team/{team_id}/players")
     public List<Player> getPlayers(@PathVariable int team_id) {
 
         List<Player> players = teamService.getPlayers(team_id);
