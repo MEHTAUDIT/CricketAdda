@@ -1,30 +1,37 @@
-import { useState } from 'react'
+
 
 import './App.css'
 
 import { Navbar } from './components/Navbar'
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Tournaments from './components/tournament/Tournaments';
+import Players from './components/players/Players';
+import AddTournament from './components/tournament/AddTournament';
+import { Toaster } from 'react-hot-toast';
+import TournamentPage from './components/tournament/TournamentPage';
 
 function App() {
-  const [count, setCount] = useState(0)
+  
 
   return (
-    <div className=''>
-      <Navbar/>
+    <div className=' font-secondary'>
+      <Router>
 
-      <div className='flex flex-col justify-center items-center space-y-10 m-10 p-20'>
-
-        <div className='flex justify-center items-center'>
-          <img src="/cricket2.jpeg" alt="" className='w-[400px] rounded-2xl'/>
-          <p className=' text-center text-4xl'>CricketAdda</p>
-
+        <Navbar/>
+        <Toaster/>
+        <div className='flex min-h-screen flex-col items-center mt-10'>
+          <Routes>
+            <Route path="/" element={<h1>Home</h1>} />
+            <Route path="/tournaments" element={<Tournaments/>} />
+            <Route path="/tournaments/:id" element={<TournamentPage/>} />
+            <Route path="/tournaments/new" element={<AddTournament/>} />
+            <Route path="/players" element={<Players/>} />
+          </Routes>
         </div>
-        
-        <div className='flex justify-center items-center'>
-        <p className='p-10'>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Labore, culpa exercitationem repellendus impedit in a mollitia sunt blanditiis aliquid id.</p>
-        <img src="/cricket3.jpeg" alt="" className='w-2/5 rounded-2xl'/>
-        </div>
 
-      </div>
+     
+      </Router>
+
     </div>
   )
 }
