@@ -12,7 +12,7 @@ public class Player {
     private String role;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "team_id", referencedColumnName = "team_id")
+    @JoinColumn(name = "team_id")
     private Team team;
 
     public int getId() {
@@ -45,5 +45,14 @@ public class Player {
 
     public void setTeam(Team team) {
         this.team = team;
+    }
+
+    @Override
+    public String toString() {
+        return "Player{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", role='" + role + '\'' +
+                '}';
     }
 }

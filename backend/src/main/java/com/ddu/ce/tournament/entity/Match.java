@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 public class Match {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int match_id;
+    private int id;
 
 
     private String match_status;
@@ -23,12 +23,12 @@ public class Match {
 
     private int winner;
 
-    public int getMatch_id() {
-        return match_id;
+    public int getId() {
+        return id;
     }
 
-    public void setMatch_id(int match_id) {
-        this.match_id = match_id;
+    public void setId(int match_id) {
+        this.id = match_id;
     }
 
     public String getMatch_status() {

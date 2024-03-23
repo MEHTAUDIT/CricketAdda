@@ -8,7 +8,8 @@ import java.util.List;
 public class Tournament {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int tournament_id;
+    private int id;
+
 
     private String tournament_name;
     private String tournament_type;
@@ -21,12 +22,12 @@ public class Tournament {
     )
     private List<Team> teams;
 
-    public int getTournament_id() {
-        return tournament_id;
+    public int getId() {
+        return id;
     }
 
-    public void setTournament_id(int tournament_id) {
-        this.tournament_id = tournament_id;
+    public void setId(int tournament_id) {
+        this.id = tournament_id;
     }
 
     public String getTournament_name() {
