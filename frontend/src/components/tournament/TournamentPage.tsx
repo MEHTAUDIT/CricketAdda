@@ -10,6 +10,8 @@ import {
   TableHead,
   TableRow,
 } from "@/components/ui/table";
+import AddMatch from "../match/AddMatch";
+import AddTeam from "../team/AddTeam";
 
 export default function TournamentPage() {
   const { id } = useParams();
@@ -59,7 +61,7 @@ export default function TournamentPage() {
 
 
 
-        <div className="grid grid-cols-2 gap-4 mt-5">
+        <div className="grid grid-cols-2 gap-4 my-5">
             {matches.map((match, i) => (
             <Card key={i} className="bg-gray-100 p-4 rounded-lg cursor-pointer space-y-2">
                 <h2 className="text-xl">{match.team1.team_name} vs {match.team2.team_name}</h2>
@@ -69,11 +71,13 @@ export default function TournamentPage() {
             ))}
         </div>
 
+        <AddMatch tournamentId={id} teams={teams}/>
+
 
 
         <h1 className="text-2xl mt-16">Teams of <span className=" font-medium">{ tournament?.tournament_name}</span></h1>
 
-        <Table className="w-[800px] shadow-md ">
+        <Table className="w-[800px] shadow-md mb-5">
        <TableCaption> All the teams participated in this tournament .</TableCaption>
         <TableHead>
           
@@ -94,6 +98,8 @@ export default function TournamentPage() {
           ))}
         </TableBody>
       </Table>
+
+      <AddTeam tournament_id={id} />
     </div>
   );
 }
