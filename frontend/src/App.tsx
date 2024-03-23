@@ -9,6 +9,8 @@ import Players from './components/players/Players';
 import AddTournament from './components/tournament/AddTournament';
 import { Toaster } from 'react-hot-toast';
 import TournamentPage from './components/tournament/TournamentPage';
+import Home from './components/Home';
+import About from './components/About';
 
 function App() {
   
@@ -21,11 +23,12 @@ function App() {
         <Toaster/>
         <div className='flex min-h-screen flex-col items-center mt-10'>
           <Routes>
-            <Route path="/" element={<h1>Home</h1>} />
+            <Route path="/" element={<Home/>} />
             <Route path="/tournaments" element={<Tournaments/>} />
             <Route path="/tournaments/:id" element={<TournamentPage/>} />
             <Route path="/tournaments/new" element={<AddTournament/>} />
             <Route path="/players" element={<Players/>} />
+            <Route path='/about' element={<About/>}></Route>
           </Routes>
         </div>
 

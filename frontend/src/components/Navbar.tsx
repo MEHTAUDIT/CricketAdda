@@ -47,11 +47,11 @@ export function Navbar() {
     <NavigationMenu>
       <NavigationMenuList>
         <NavigationMenuItem>
-          <div className="flex justify-center items-center">
+          <a className="flex justify-center items-center" href="/">
             <img src="/logo.png" alt="" className="h-14" />
             <h1 className="text-2xl font-bold ml-2">CricketAdda</h1>
 
-          </div>
+          </a>
           
         </NavigationMenuItem>
         <NavigationMenuItem>
@@ -71,7 +71,7 @@ export function Navbar() {
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <a href="/docs"  >
+          <a href="/about"  >
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
               About Us
             </NavigationMenuLink>
