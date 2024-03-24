@@ -89,8 +89,9 @@ public class TournamentCotroller {
 
 
     @PostMapping("/tournament/check")
-    public String check(@RequestBody MatchRequest request) {
-        return "tournament_id: " + request.getTournament_id();
+    @PreAuthorize("hasRole('ADMIN')")
+    public String check(@RequestBody String tournament_id) {
+        return "tournament_id: " + tournament_id;
 
     }
 
