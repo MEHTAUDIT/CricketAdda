@@ -21,12 +21,13 @@ import {
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 export default function AddMatch(props: any) {
   const [matchForm, setMatchForm] = useState({
     team1: 0,
     team2: 0,
-    match_date: "",
+    match_date : new Date().toISOString().slice(0, 10),
     tournament: props.tournament_id,
   });
 
@@ -35,20 +36,23 @@ export default function AddMatch(props: any) {
       ...matchForm,
       [e.target.name]: e.target.value,
     });
+    console.log(matchForm)
   };
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    const response = await axios.post(
-      "http://localhost:8080/api/tournament/addmatch",
-      matchForm
-    );
-    if (response.status === 200) {
-      console.log("Match added successfully");
-    } else if (response.status === 400) {
-      console.log("Error adding match");
+    
+    try{
+      const response = await axios.post('http://localhost:8080/api/tournament/addmatch' , matchForm)
+      console.log(response)
+      toast.success('Match Created')
     }
-    console.log(matchForm);
+    catch(err : any){
+      console.log(err)
+      toast.error("Failed to create match , check you have authourization to create match")
+    }
+
+
 
   };
 
@@ -73,7 +77,7 @@ export default function AddMatch(props: any) {
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="name">Team No.1</Label>
               
-                <Select name="team1" onValueChange={handleChange}>
+                <Select name="team1" onValueChange={(target) => setMatchForm({ ...matchForm, team1: parseInt(target) })}>
                   <SelectTrigger>
                     <SelectValue placeholder="Team" />
                   </SelectTrigger>
@@ -88,7 +92,7 @@ export default function AddMatch(props: any) {
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="name">Team No.2</Label>
               
-                <Select name="team2" onValueChange={handleChange}>
+                <Select name="team2" onValueChange={(target) => setMatchForm({ ...matchForm, team2: parseInt(target) })}>
                   <SelectTrigger>
                     <SelectValue placeholder="Team" />
                   </SelectTrigger>

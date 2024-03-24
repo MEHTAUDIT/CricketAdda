@@ -4,6 +4,7 @@ import com.ddu.ce.tournament.entity.Match;
 import com.ddu.ce.tournament.entity.Player;
 import com.ddu.ce.tournament.entity.Team;
 import com.ddu.ce.tournament.entity.Tournament;
+import com.ddu.ce.tournament.payload.request.MatchRequest;
 import com.ddu.ce.tournament.service.imp.PlayerServiceImpl;
 import com.ddu.ce.tournament.service.imp.TournamentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,7 @@ public class TournamentCotroller {
     }
 
     @GetMapping("/tournament/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public Tournament findTournament(@PathVariable int id) {
         System.out.println("TournamentCotroller.findTournament");
         return tournamentService.findById(id);
@@ -79,8 +81,18 @@ public class TournamentCotroller {
 
     @PostMapping("/tournament/addmatch")
     @PreAuthorize("hasRole('ADMIN')")
-    public void addMatchToTournament(@RequestBody int tournament_id, @RequestBody int team1_id, @RequestBody int team2_id) {
+    public void addMatchToTournament(@RequestBody MatchRequest request) {
         System.out.println("TournamentCotroller.addMatchToTournament");
-        tournamentService.addMatchToTournament(tournament_id, team1_id, team2_id );
+        tournamentService.addMatchToTournament(request.getTournament_id(), request.getTeam1_id(), request.getTeam2_id() , request.getMatch_date() );
     }
+
+
+
+    @PostMapping("/tournament/check")
+    public String check(@RequestBody MatchRequest request) {
+        return "tournament_id: " + request.getTournament_id();
+
+    }
+
+
 }

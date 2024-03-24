@@ -23,6 +23,7 @@ export default function About() {
         <ul className="list-disc pl-6">
           <li>Spring Boot (Java) for robust backend development</li>
           <li>RESTful APIs for smooth communication</li>
+          <li>spring-boot-security with JWT for secure authentication</li>
           <li>MySQL for efficient data storage and retrieval</li>
         </ul>
       </div>

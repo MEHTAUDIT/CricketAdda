@@ -15,7 +15,14 @@ export default function Tournaments() {
     }   , [])
 
     const fetchTournaments = async () => {
-        const response = await axios.get('http://localhost:8080/api/tournaments')
+        const response = await axios.get('http://localhost:8080/api/tournaments' ,
+        {
+            headers: {
+                Authorization: `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLUklTIiwiaWF0IjoxNzExMjY2NTYxLCJleHAiOjE3MTEyODQ1NjF9.Q9iXXYwQdtsWo6NfLYjshDwmkIHb-rDTxhnUcetivV4NhdTeSXmn0TG779jGGQyqRID-pacAYVas7udaugk9Ow`
+                   
+            }
+        }
+        )
         setTournaments(response.data)
         console.log(tournaments)
     }

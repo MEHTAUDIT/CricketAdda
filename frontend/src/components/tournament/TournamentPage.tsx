@@ -71,7 +71,7 @@ export default function TournamentPage() {
             ))}
         </div>
 
-        <AddMatch tournamentId={id} teams={teams}/>
+        <AddMatch tournament_id={id} teams={teams}/>
 
 
 

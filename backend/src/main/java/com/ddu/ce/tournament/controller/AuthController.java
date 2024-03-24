@@ -11,6 +11,7 @@ import com.ddu.ce.tournament.payload.response.MessageResponse;
 import com.ddu.ce.tournament.payload.response.UserInfoResponse;
 import com.ddu.ce.tournament.security.jwt.JwtUtils;
 import com.ddu.ce.tournament.security.services.UserDetailsImpl;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -31,7 +32,7 @@ import java.util.stream.Collectors;
 
 
 
-@CrossOrigin
+@CrossOrigin ( origins = "*" )
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -62,7 +63,7 @@ public class AuthController {
 
 
     @PostMapping("/login")
-    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest , HttpServletResponse response) {
       System.out.println("Inside authenticateUser from login");
 
       Authentication authentication = authenticationManager
@@ -72,7 +73,7 @@ public class AuthController {
 
       UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 
-      ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(userDetails);
+      ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(userDetails , response);
 
       List<String> roles = userDetails.getAuthorities().stream()
               .map(item -> item.getAuthority())

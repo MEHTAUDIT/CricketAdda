@@ -6,6 +6,7 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -38,10 +39,18 @@ public class JwtUtils {
     }
   }
 
-  public ResponseCookie generateJwtCookie(UserDetailsImpl userPrincipal) {
+  public ResponseCookie generateJwtCookie(UserDetailsImpl userPrincipal , HttpServletResponse response) {
     String jwt = generateTokenFromUsername(userPrincipal.getUsername());
-    ResponseCookie cookie = ResponseCookie.from(jwtCookie, jwt).path("/api").maxAge(24 * 60 * 60).httpOnly(true).build();
-    return cookie;
+    System.out.println("jwt: " + jwt);
+    ResponseCookie responseCookiecookie = ResponseCookie.from(jwtCookie, jwt).path("/api").maxAge(24 * 60 * 60).httpOnly(true).build();
+
+    Cookie cookie = new Cookie(jwtCookie, jwt);
+//    cookie.setPath("/api");
+    cookie.setMaxAge(24 * 60 * 60);
+    cookie.setHttpOnly(true);
+
+    response.addCookie(cookie);
+    return responseCookiecookie;
   }
 
   public ResponseCookie getCleanJwtCookie() {
@@ -75,7 +84,8 @@ public class JwtUtils {
     return false;
   }
   
-  public String generateTokenFromUsername(String username) {   
+  public String generateTokenFromUsername(String username) {
+
     return Jwts.builder()
               .setSubject(username)
               .setIssuedAt(new Date())

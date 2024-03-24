@@ -15,6 +15,9 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
 import { Link } from "react-router-dom"
+import { Button } from "./ui/button"
+import { useSelector } from "react-redux"
+
 
 const components: { title: string; href: string; description: string }[] = [
   {
@@ -41,8 +44,13 @@ const components: { title: string; href: string; description: string }[] = [
 ]
 
 export function Navbar() {
+
+  const user = useSelector((state : any) => state.user.user) || null;
+  
+ 
+
   return (
-    <div className="border-b p-2 shadow-md">
+    <div className="border-b p-2 shadow-md flex justify-around items-center">
 
    
     <NavigationMenu>
@@ -81,6 +89,11 @@ export function Navbar() {
         </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>
+      {user? user.username : ""}
+      { !user    &&
+        <Button className="ml-auto"><Link to="/login">Login</Link></Button>
+      }
+
     </div>
   )
 

@@ -16,14 +16,14 @@ export default function () {
   const handleSubmit = async ( e : any) => {
     e.preventDefault()
     // console.log(form);
-    const response = await axios.post('http://localhost:8080/api/tournament' , form)
-
-    if(response.status === 200){
-      toast.success('Tournament created successfully')
+    try{
+       await axios.post('http://localhost:8080/api/tournament' , form)
+      toast.success('Tournament Created')
     }
-    else if(response.status === 400){
-      toast.error('Error creating tournament')
+    catch(err : any){
+      toast.error("Failed to create tournament , check you have authourization to create tournament")
     }
+   
   };
 
   const handleChange = (e: any) => {
