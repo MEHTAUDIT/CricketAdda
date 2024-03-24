@@ -5,6 +5,7 @@ import com.ddu.ce.tournament.entity.Player;
 import com.ddu.ce.tournament.entity.Team;
 import com.ddu.ce.tournament.service.imp.TeamServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,6 +19,7 @@ public class TeamContoller {
     private TeamServiceImpl teamService;
 
     @PostMapping("/team")
+    @PreAuthorize("hasRole('ADMIN')")
     public void createTeam(@RequestBody Team team) {
         System.out.println("TeamContoller.createTeam");
         teamService.save(team);
@@ -30,18 +32,21 @@ public class TeamContoller {
     }
 
     @DeleteMapping("/team/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public void deleteTeam(@PathVariable int id) {
         System.out.println("TeamContoller.deleteTeam");
         teamService.deleteById(id);
     }
 
     @GetMapping("/teams")
+    @PreAuthorize("hasRole('ADMIN')")
     public Iterable<Team> findAllTeams() {
         System.out.println("TeamContoller.findAllTeams");
         return teamService.findAll();
     }
 
     @PutMapping("/team")
+    @PreAuthorize("hasRole('ADMIN')")
     public void updateTeam(@RequestBody Team team) {
         System.out.println("TeamContoller.updateTeam");
         teamService.save(team);

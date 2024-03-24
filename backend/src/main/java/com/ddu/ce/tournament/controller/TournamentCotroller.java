@@ -7,6 +7,7 @@ import com.ddu.ce.tournament.entity.Tournament;
 import com.ddu.ce.tournament.service.imp.PlayerServiceImpl;
 import com.ddu.ce.tournament.service.imp.TournamentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -21,6 +22,7 @@ public class TournamentCotroller {
     private TournamentServiceImpl tournamentService;
 
     @PostMapping("/tournament")
+    @PreAuthorize("hasRole('ADMIN')")
     public void createTournament(@RequestBody Tournament tournament) {
         System.out.println("TournamentCotroller.createTournament");
         tournamentService.save(tournament);
@@ -33,18 +35,21 @@ public class TournamentCotroller {
     }
 
     @DeleteMapping("/tournament/{id}/delete")
+    @PreAuthorize("hasRole('ADMIN')")
     public void deleteTournament(@PathVariable int id) {
         System.out.println("TournamentCotroller.deleteTournament");
         tournamentService.deleteById(id);
     }
 
     @GetMapping("/tournaments")
+    @PreAuthorize("hasRole('ADMIN')")
     public Iterable<Tournament> findAllTournaments() {
         System.out.println("TournamentCotroller.findAllTournaments");
         return tournamentService.findAll();
     }
 
     @PutMapping("/tournament")
+    @PreAuthorize("hasRole('ADMIN')")
     public void updateTournament(@RequestBody Tournament tournament) {
         System.out.println("TournamentCotroller.updateTournament");
         tournamentService.save(tournament);
@@ -73,6 +78,7 @@ public class TournamentCotroller {
     }
 
     @PostMapping("/tournament/addmatch")
+    @PreAuthorize("hasRole('ADMIN')")
     public void addMatchToTournament(@RequestBody int tournament_id, @RequestBody int team1_id, @RequestBody int team2_id) {
         System.out.println("TournamentCotroller.addMatchToTournament");
         tournamentService.addMatchToTournament(tournament_id, team1_id, team2_id );

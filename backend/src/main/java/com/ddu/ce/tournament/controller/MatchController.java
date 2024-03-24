@@ -5,6 +5,7 @@ import com.ddu.ce.tournament.service.MatchService;
 import com.ddu.ce.tournament.service.imp.MatchServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -21,6 +22,7 @@ public class MatchController {
     }
 
    @PostMapping("/match")
+   @PreAuthorize("hasRole('ADMIN')")
     public void createMatch(@RequestBody Match match) {
         System.out.println("MatchController.createMatch");
         matchService.save(match);
@@ -32,7 +34,9 @@ public class MatchController {
         return matchService.findById(id);
     }
 
+
     @DeleteMapping("/match/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public void deleteMatch(@PathVariable int id) {
         System.out.println("MatchController.deleteMatch");
         matchService.deleteById(id);
@@ -45,6 +49,7 @@ public class MatchController {
     }
 
     @PutMapping("/match")
+    @PreAuthorize("hasRole('ADMIN')")
     public void updateMatch(@RequestBody Match match) {
         System.out.println("MatchController.updateMatch");
         matchService.save(match);
