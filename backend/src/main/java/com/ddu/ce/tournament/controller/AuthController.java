@@ -31,7 +31,7 @@ import java.util.stream.Collectors;
 
 
 
-@CrossOrigin( origins = "*")
+@CrossOrigin
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -50,9 +50,20 @@ public class AuthController {
   @Autowired
   JwtUtils jwtUtils;
 
+  @GetMapping("/test")
+    public String test() {
+        return "test";
+  }
+  @PostMapping("/signin")
+  public String test2() {
+    return "This is from signin";
+  }
 
-    @PostMapping("/signin")
+
+
+    @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+      System.out.println("Inside authenticateUser from login");
 
       Authentication authentication = authenticationManager
               .authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
@@ -74,7 +85,7 @@ public class AuthController {
                       roles));
     }
 
-  @PostMapping("/signup")
+  @PostMapping("/regsiter")
   public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
     if (userRepository.existsByUsername(signUpRequest.getUsername())) {
       return ResponseEntity.badRequest().body(new MessageResponse("Error: Username is already taken!"));
@@ -125,7 +136,7 @@ public class AuthController {
     return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
   }
 
-  @PostMapping("/signout")
+  @PostMapping("/logout")
   public ResponseEntity<?> logoutUser() {
     ResponseCookie cookie = jwtUtils.getCleanJwtCookie();
     return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, cookie.toString())

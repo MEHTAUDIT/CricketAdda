@@ -42,7 +42,7 @@ public class TournamentCotroller {
     }
 
     @GetMapping("/tournaments")
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     public Iterable<Tournament> findAllTournaments() {
         System.out.println("TournamentCotroller.findAllTournaments");
         return tournamentService.findAll();
