@@ -12,7 +12,7 @@ public class MatchRequest {
     private int team1_id;
     private int team2_id;
     private int tournament_id;
-    private Date match_date;
+    private String match_date;
 
     public int getTeam1_id() {
         return team1_id;
@@ -38,11 +38,11 @@ public class MatchRequest {
         this.tournament_id = tournament_id;
     }
 
-    public Date getMatch_date() {
+    public String getMatch_date() {
         return match_date;
     }
 
-    public void setMatch_date(Date match_date) {
+    public void setMatch_date(String match_date) {
         this.match_date = match_date;
     }
 

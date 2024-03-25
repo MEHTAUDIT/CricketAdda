@@ -1,5 +1,6 @@
 package com.ddu.ce.tournament.payload.response;
 
+import com.ddu.ce.tournament.security.jwt.JwtUtils;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,20 +14,16 @@ public class UserInfoResponse {
 
 	private String jwtToken;
 
-	public UserInfoResponse(Long id, String username, String email, List<String> roles) {
-		this.id = id;
-		this.username = username;
-		this.email = email;
-		this.roles = roles;
-	}
 
-	public UserInfoResponse(Long id, String username, String email, List<String> roles, String jwtToken) {
+	public UserInfoResponse(Long id, String username, String email, List<String> roles , String jwtToken) {
 		this.id = id;
 		this.username = username;
 		this.email = email;
 		this.roles = roles;
 		this.jwtToken = jwtToken;
 	}
+
+	
 
 	public Long getId() {
 		return id;

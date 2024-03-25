@@ -12,22 +12,28 @@ import {
 } from "@/components/ui/table";
 import AddMatch from "../match/AddMatch";
 import AddTeam from "../team/AddTeam";
+// import { useSelector } from "react-redux";
 
-export default function TournamentPage() {
+export default function TournamentPage( props : any) {
   const { id } = useParams();
 
+  
   useEffect(() => {
-    document.title = `Tournament`;
-
+  
     fetchTournament();
     fetchMatches();
     fetchTeams();
   }, []);
 
   const fetchTournament = async () => {
-    console.log("fetching tournament");
+
     const response = await axios.get(
-      `http://localhost:8080/api/tournament/${id}`
+      `http://localhost:8080/api/tournament/${id}` ,
+      {
+        headers: {
+          Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJLcmlzIiwiaWF0IjoxNzExMzA0NzIwLCJleHAiOjE3MTEzOTExMjB9.Q4ePWxlgImAouYx7QhoQpIvwQLY3_BxK2ub-fcUtRHc`,
+        },
+      }
     );
     setTournament(response.data);
   };
@@ -53,6 +59,7 @@ export default function TournamentPage() {
   const [matches, setMatches] = useState<any[]>([]);
 
   const [teams , setTeams] = useState<any[]>([]);
+
 
 
   return (

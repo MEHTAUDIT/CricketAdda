@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "*"  )
+@CrossOrigin(origins = "http://localhost:5173"  )
 public class TournamentCotroller {
 
     @Autowired
@@ -31,13 +31,14 @@ public class TournamentCotroller {
     }
 
     @GetMapping("/tournament/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
-    public Tournament findTournament(@PathVariable int id) {
-        System.out.println("TournamentController.findTournament");
-        return tournamentService.findById(id);
+//    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> findTournament(@PathVariable int id) {
+//        System.out.println("TournamentController.findTournament");
+
+        return  ResponseEntity.ok().body(new TournamentInfoResponse(tournamentService.findById(id)));
     }
 
-    @DeleteMapping("/tournament/{id}/delete")
+    @DeleteMapping("/tournament/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public String deleteTournament(@PathVariable int id) {
         System.out.println("TournamentCotroller.deleteTournament");
@@ -46,7 +47,7 @@ public class TournamentCotroller {
     }
 
     @GetMapping("/tournaments")
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> findAllTournaments() {
         System.out.println("TournamentCotroller.findAllTournaments");
         List<Tournament> tournaments = tournamentService.findAll();
@@ -67,6 +68,7 @@ public class TournamentCotroller {
     }
 
     @GetMapping("/tournament/{tournament_id}/addteam/{team_id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public String addTeamToTournament(@PathVariable int tournament_id, @PathVariable int team_id) {
         System.out.println("TournamentCotroller.addTeamToTournament");
         tournamentService.addTeamToTournament(tournament_id, team_id);
@@ -98,7 +100,6 @@ public class TournamentCotroller {
     @PreAuthorize("hasRole('ADMIN')")
     public String check(@RequestBody String tournament_id) {
         return "tournament_id: " + tournament_id;
-
     }
 
 }

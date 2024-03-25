@@ -12,12 +12,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseCookie;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.util.WebUtils;
 
 import java.security.Key;
 import java.util.Date;
 
 @Component
+@CrossOrigin(origins = "http://localhost:5173")
 public class JwtUtils {
   private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
 
@@ -32,6 +34,15 @@ public class JwtUtils {
 
   public String getJwtFromCookies(HttpServletRequest request) {
     Cookie cookie = WebUtils.getCookie(request, jwtCookie);
+//    Cookie[] cookies = request.getCookies();
+//    if (cookies != null) {
+//      for (Cookie c : cookies) {
+//        System.out.println("cookie: " + c.getName() + " : " + c.getValue());
+//      }
+//    }
+//    else {
+//        System.out.println("No cookies");
+//    }
     if (cookie != null) {
       return cookie.getValue();
     } else {

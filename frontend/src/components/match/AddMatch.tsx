@@ -22,6 +22,7 @@ import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
 
 export default function AddMatch(props: any) {
   const [matchForm, setMatchForm] = useState({
@@ -30,6 +31,8 @@ export default function AddMatch(props: any) {
     match_date : new Date().toISOString().slice(0, 10),
     tournament: props.tournament_id,
   });
+
+  const user = useSelector((state: any) => state.user.user) || null;
 
   const handleChange = (e: any) => {
     setMatchForm({
@@ -43,7 +46,13 @@ export default function AddMatch(props: any) {
     e.preventDefault();
     
     try{
-      const response = await axios.post('http://localhost:8080/api/tournament/addmatch' , matchForm)
+      const response = await axios.post('http://localhost:8080/api/tournament/addmatch' , matchForm , 
+        {
+          headers: {
+            Authorization: `Bearer ${user?.jwtToken}`
+          }
+        }
+      )
       console.log(response)
       toast.success('Match Created')
     }

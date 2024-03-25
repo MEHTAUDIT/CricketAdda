@@ -30,7 +30,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@CrossOrigin ( origins = "*" )
+
+
+@CrossOrigin(origins = "http://localhost:5173"  )
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -73,6 +75,8 @@ public class AuthController {
 
       ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(userDetails , response);
 
+      String jwtToken = jwtUtils.generateTokenFromUsername(userDetails.getUsername());
+
       List<String> roles = userDetails.getAuthorities().stream()
               .map(item -> item.getAuthority())
               .collect(Collectors.toList());
@@ -81,7 +85,7 @@ public class AuthController {
               .body(new UserInfoResponse(userDetails.getId(),
                       userDetails.getUsername(),
                       userDetails.getEmail(),
-                      roles));
+                      roles , jwtToken ));
     }
 
   @PostMapping("/register")
@@ -135,10 +139,17 @@ public class AuthController {
     return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
   }
 
+//  @PostMapping("/user")
+//    public ResponseEntity<?> getUserInfo() {
+//        return ResponseEntity.ok(userInfoResponse);
+//    }
+
   @PostMapping("/logout")
   public ResponseEntity<?> logoutUser() {
     ResponseCookie cookie = jwtUtils.getCleanJwtCookie();
     return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, cookie.toString())
         .body(new MessageResponse("You've been signed out!"));
   }
+
+
 }

@@ -5,6 +5,8 @@ import axios from "axios";
 import { Button } from "../ui/button";
 import { Label } from "../ui/label";
 import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export default function () {
   const [form, setForm] = useState({
@@ -13,12 +15,22 @@ export default function () {
     start_date: " ",
   });
 
+  const user = useSelector((state: any) => state.user.user) || null;
+
+  const navigate = useNavigate();
+
   const handleSubmit = async ( e : any) => {
     e.preventDefault()
     // console.log(form);
     try{
-       await axios.post('http://localhost:8080/api/tournament' , form)
+       await axios.post('http://localhost:8080/api/tournament' , form , 
+       {  headers: {
+        Authorization: `Bearer ${user?.jwtToken}`
+        }
+      }
+       )
       toast.success('Tournament Created')
+      navigate('/tournaments')
     }
     catch(err : any){
       toast.error("Failed to create tournament , check you have authourization to create tournament")
