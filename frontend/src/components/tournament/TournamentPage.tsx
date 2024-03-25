@@ -14,7 +14,7 @@ import AddMatch from "../match/AddMatch";
 import AddTeam from "../team/AddTeam";
 // import { useSelector } from "react-redux";
 
-export default function TournamentPage( props : any) {
+export default function TournamentPage() {
   const { id } = useParams();
 
   

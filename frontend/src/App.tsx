@@ -13,7 +13,6 @@ import Home from './components/Home';
 import About from './components/About';
 import Login from './components/auth/Login';
 import { useEffect  } from 'react';
-import { useSelector } from 'react-redux';
 import CreateTeam from './components/team/CreateTeam';
 // import { useSelector } from 'react-redux';
 
@@ -49,7 +48,7 @@ function App() {
    
   }
 
-  const user = useSelector((state : any) => state.user.user) || null;
+  
   
 
   return (
@@ -65,7 +64,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home/>} />
             <Route path="/tournaments" element={<Tournaments/>} />
-            <Route path="/tournaments/:id" element={<TournamentPage user={user}/>} />
+            <Route path="/tournaments/:id" element={<TournamentPage/>} />
             <Route path="/tournaments/new" element={<AddTournament/>} />
             <Route path="/players" element={<Players/>} />
             <Route path='/about' element={<About/>}></Route>
