@@ -56,6 +56,7 @@ public class TeamContoller {
     }
 
     @GetMapping("team/{team_id}/addplayer/{player_id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public String addPlayerToTeam(@PathVariable int team_id, @PathVariable int player_id) {
 
         teamService.addPlayerToTeam(team_id, player_id);
@@ -68,13 +69,6 @@ public class TeamContoller {
         return teamService.getPlayers(team_id);
     }
 
-    public TeamServiceImpl getTeamService() {
-        return teamService;
-    }
-
-    public void setTeamService(TeamServiceImpl teamService) {
-        this.teamService = teamService;
-    }
 
     @DeleteMapping("/delete/team/{team_id}/deleteplayer/{player_id}")
 //    @PreAuthorize("hasRole('ADMIN')")

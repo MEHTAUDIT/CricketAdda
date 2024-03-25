@@ -11,11 +11,14 @@ public class TournamentInfoResponse {
     String tournament_name;
     String tournament_type;
 
+    String start_date;
+
 
     public TournamentInfoResponse(Tournament tournament) {
         this.tournament_id = tournament.getId();
         this.tournament_name = tournament.getTournament_name();
         this.tournament_type = tournament.getTournament_type();
+        this.start_date = tournament.getStart_date();
     }
 
     public int getTournament_id() {
@@ -40,6 +43,14 @@ public class TournamentInfoResponse {
 
     public void setTournament_type(String tournament_type) {
         this.tournament_type = tournament_type;
+    }
+
+    public String getStart_date() {
+        return start_date;
+    }
+
+    public void setStart_date(String start_date) {
+        this.start_date = start_date;
     }
 
     @Override

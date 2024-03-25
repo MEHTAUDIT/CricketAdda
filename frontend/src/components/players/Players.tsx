@@ -8,6 +8,7 @@ import {
   TableHead,
   TableRow,
 } from "@/components/ui/table";
+import EditPlayer from "./EditPlayer";
 
 export default function Players() {
   useEffect(() => {
@@ -22,9 +23,17 @@ export default function Players() {
 
   const [players, setPlayers] = useState<any[]>([]);
 
+  const player = {
+    name: "",
+    role: "",
+    team: "",
+  };
+
   return (
     <div>
-      <h1 className="text-4xl">All Players</h1>
+      <h1 className="text-4xl mb-4">All Players</h1>
+
+      <EditPlayer player={player} text = {"Add New Player"}/>
 
       <Table className="w-[800px] shadow-md ">
         <TableCaption>All the players that have participated in the tournaments are listed here.</TableCaption>
@@ -45,6 +54,10 @@ export default function Players() {
               {/* <TableCell>{player.team}</TableCell> */}
               <TableCell>
                 {player.team ? player.team.team_name : "-"}
+              </TableCell>
+
+              <TableCell>
+                  <EditPlayer player={player} text={"Edit"}/>
               </TableCell>
             </TableRow>
           ))}
