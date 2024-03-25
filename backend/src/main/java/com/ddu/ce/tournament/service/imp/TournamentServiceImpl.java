@@ -33,16 +33,18 @@ public class TournamentServiceImpl implements com.ddu.ce.tournament.service.Tour
         this.tournamentDAO = tournamentDAO;
     }
 
-    public void save(Tournament tournament) {
+    public String save(Tournament tournament) {
         tournamentDAO.save(tournament);
+        return "Tournament saved";
     }
 
     public Tournament findById(int id) {
         return tournamentDAO.findById(id).get();
     }
 
-    public void deleteById(int id) {
+    public String deleteById(int id) {
         tournamentDAO.deleteById(id);
+        return "Tournament deleted";
     }
 
 
@@ -54,12 +56,13 @@ public class TournamentServiceImpl implements com.ddu.ce.tournament.service.Tour
         tournamentDAO.deleteAll();
     }
 
-    public void addTeamToTournament(int tournament_id, int team_id) {
+    public String addTeamToTournament(int tournament_id, int team_id) {
 
         Tournament tournament = tournamentDAO.findById(tournament_id).get();
         Team team = teamDAO.findById(team_id).get();
         tournament.getTeams().add(team);
         tournamentDAO.save(tournament);
+        return "Team added to tournament";
     }
 
     public List<Team> getTeams(int tournament_id) {
@@ -76,7 +79,7 @@ public class TournamentServiceImpl implements com.ddu.ce.tournament.service.Tour
         return matches;
     }
 
-    public void addMatchToTournament(int tournament_id, int team1_id, int team2_id , Date match_date ){
+    public String addMatchToTournament(int tournament_id, int team1_id, int team2_id , Date match_date ){
         Match match = new Match();
         match.setTeam1(teamDAO.findById(team1_id).get());
         match.setTeam2(teamDAO.findById(team2_id).get());
@@ -85,6 +88,7 @@ public class TournamentServiceImpl implements com.ddu.ce.tournament.service.Tour
         match.setMatch_date(match_date);
         match.setTournament(findById(tournament_id));
         matchDAO.save(match);
+        return "Match added to tournament";
     }
 
 }

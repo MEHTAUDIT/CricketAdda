@@ -11,6 +11,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -27,10 +28,11 @@ public class MatchController {
     }
 
    @PostMapping("/match")
-   @PreAuthorize("hasRole('ADMIN')")
-    public void createMatch(@RequestBody Match match) {
+//   @PreAuthorize("hasRole('ADMIN')")
+    public String createMatch(@RequestBody Match match) {
         System.out.println("MatchController.createMatch");
         matchService.save(match);
+        return "Match saved";
     }
 
     @GetMapping("/match/{id}")
@@ -42,9 +44,10 @@ public class MatchController {
 
     @DeleteMapping("/match/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public void deleteMatch(@PathVariable int id) {
+    public String deleteMatch(@PathVariable int id) {
         System.out.println("MatchController.deleteMatch");
         matchService.deleteById(id);
+        return "Match deleted";
     }
 
     @GetMapping("/matches")
@@ -55,9 +58,10 @@ public class MatchController {
 
     @PutMapping("/match")
     @PreAuthorize("hasRole('ADMIN')")
-    public void updateMatch(@RequestBody Match match) {
+    public String updateMatch(@RequestBody Match match) {
         System.out.println("MatchController.updateMatch");
         matchService.save(match);
+        return "Match updated";
     }
 
 

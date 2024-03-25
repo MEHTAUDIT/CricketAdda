@@ -20,9 +20,10 @@ public class TeamContoller {
 
     @PostMapping("/team")
     @PreAuthorize("hasRole('ADMIN')")
-    public void createTeam(@RequestBody Team team) {
+    public String createTeam(@RequestBody Team team) {
         System.out.println("TeamContoller.createTeam");
         teamService.save(team);
+        return "Team saved";
     }
 
     @GetMapping("/team/{id}")
@@ -33,13 +34,14 @@ public class TeamContoller {
 
     @DeleteMapping("/team/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public void deleteTeam(@PathVariable int id) {
+    public String deleteTeam(@PathVariable int id) {
         System.out.println("TeamContoller.deleteTeam");
         teamService.deleteById(id);
+        return "Team deleted";
     }
 
     @GetMapping("/teams")
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     public Iterable<Team> findAllTeams() {
         System.out.println("TeamContoller.findAllTeams");
         return teamService.findAll();
@@ -47,15 +49,17 @@ public class TeamContoller {
 
     @PutMapping("/team")
     @PreAuthorize("hasRole('ADMIN')")
-    public void updateTeam(@RequestBody Team team) {
+    public String updateTeam(@RequestBody Team team) {
         System.out.println("TeamContoller.updateTeam");
         teamService.save(team);
+        return "Team updated";
     }
 
     @GetMapping("team/{team_id}/addplayer/{player_id}")
-    public void addPlayerToTeam(@PathVariable int team_id, @PathVariable int player_id) {
+    public String addPlayerToTeam(@PathVariable int team_id, @PathVariable int player_id) {
 
         teamService.addPlayerToTeam(team_id, player_id);
+        return "Player added to team";
     }
 
     @GetMapping("team/{team_id}/players")
@@ -65,6 +69,19 @@ public class TeamContoller {
         return players;
     }
 
+    public TeamServiceImpl getTeamService() {
+        return teamService;
+    }
 
+    public void setTeamService(TeamServiceImpl teamService) {
+        this.teamService = teamService;
+    }
+
+    @DeleteMapping("/delete/team/{team_id}/deleteplayer/{player_id}")
+//    @PreAuthorize("hasRole('ADMIN')")
+    public String deletePlayerFromTeam(@PathVariable int team_id, @PathVariable int player_id) {
+        teamService.deletePlayerFromTeam(team_id, player_id);
+        return "Player deleted from team";
+    }
 
 }

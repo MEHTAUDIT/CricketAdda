@@ -34,16 +34,18 @@ public class MatchServiceImpl implements com.ddu.ce.tournament.service.MatchServ
         this.matchDAO = matchDAO;
     }
 
-    public void save(Match match) {
+    public String save(Match match) {
         matchDAO.save(match);
+        return "Match saved";
     }
 
     public Match findById(int id) {
         return matchDAO.findById(id).get();
     }
 
-    public void deleteById(int id) {
+    public String deleteById(int id) {
         matchDAO.deleteById(id);
+        return "Match deleted";
     }
 
     public Iterable<Match> findAll() {
