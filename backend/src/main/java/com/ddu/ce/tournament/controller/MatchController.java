@@ -29,7 +29,7 @@ public class MatchController {
     }
 
    @PostMapping("/match")
-//   @PreAuthorize("hasRole('ADMIN')")
+   @PreAuthorize("hasRole('ADMIN')")
     public String createMatch(@RequestBody Match match) {
         System.out.println("MatchController.createMatch");
         matchService.save(match);

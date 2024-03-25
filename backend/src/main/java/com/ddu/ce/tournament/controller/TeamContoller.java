@@ -41,7 +41,7 @@ public class TeamContoller {
     }
 
     @GetMapping("/teams")
-//    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public Iterable<Team> findAllTeams() {
         System.out.println("TeamContoller.findAllTeams");
         return teamService.findAll();
@@ -71,7 +71,7 @@ public class TeamContoller {
 
 
     @DeleteMapping("/delete/team/{team_id}/deleteplayer/{player_id}")
-//    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public String deletePlayerFromTeam(@PathVariable int team_id, @PathVariable int player_id) {
         teamService.deletePlayerFromTeam(team_id, player_id);
         return "Player deleted from team";
