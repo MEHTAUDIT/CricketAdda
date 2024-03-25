@@ -76,24 +76,27 @@ public class MatchServiceImpl implements com.ddu.ce.tournament.service.MatchServ
         return team;
     }
 
-    public Team setmatchwinner(int matchId,int TeamId) {
+    public Team setmatchwinner(int matchId) {
         Match match = matchDAO.findById(matchId).get();
-        Team team= teamDAO.findById(TeamId).get();
-        match.setWinner(team);
-        matchDAO.save(match);
-        return team;
+        Team team1 = match.getTeam1();
+        Team team2 = match.getTeam2();
+
+        if (match.getTeam1_score() > match.getTeam2_score()) {
+            match.setWinner(team1);
+            match.setMatch_status("completed");
+            matchDAO.save(match);
+            return team1;
+        } else {
+            match.setWinner(team2);
+            match.setMatch_status("completed");
+            matchDAO.save(match);
+            return team2;
+        }
     }
 
     public Team getmatchwinner(int matchId) {
         Match match = matchDAO.findById(matchId).get();
         return match.getWinner();
-    }
-
-    public String updatematchstatus(int matchId) {
-        Match match = matchDAO.findById(matchId).get();
-        match.setMatch_status("completed");
-        matchDAO.save(match);
-        return "Match status updated";
     }
 
 }
