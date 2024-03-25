@@ -31,18 +31,19 @@ public class TeamServiceImpl implements com.ddu.ce.tournament.service.TeamServic
         this.teamDAO = teamDAO;
     }
 
-    public void save(Team team)
+    public String save(Team team)
     {
         teamDAO.save(team);
-
+        return "Team saved";
     }
 
     public Team findById(int id){
         return teamDAO.findById(id).get();
     }
 
-    public void deleteById(int id){
+    public String deleteById(int id){
         teamDAO.deleteById(id);
+        return "Team deleted";
     }
 
     public Iterable<Team> findAll(){
@@ -53,12 +54,12 @@ public class TeamServiceImpl implements com.ddu.ce.tournament.service.TeamServic
         teamDAO.deleteAll();
     }
 
-    public void addPlayerToTeam(int team_id, int player_id) {
+    public String addPlayerToTeam(int team_id, int player_id) {
         Team team = teamDAO.findById(team_id).get();
         Player player = playerDAO.findById(player_id).get();
         player.setTeam(team);
         playerDAO.save(player);
-
+        return "Player added to team";
 
     }
 
@@ -72,6 +73,11 @@ public class TeamServiceImpl implements com.ddu.ce.tournament.service.TeamServic
         return players;
     }
 
-
+    public String deletePlayerFromTeam(int team_id, int player_id) {
+        Player player = playerDAO.findById(player_id).get();
+        player.setTeam(null);
+        playerDAO.save(player);
+        return "Player deleted from team";
+    }
 
 }

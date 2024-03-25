@@ -1,7 +1,6 @@
 package com.ddu.ce.tournament.controller;
 
 import com.ddu.ce.tournament.entity.Player;
-import com.ddu.ce.tournament.service.PlayerService;
 import com.ddu.ce.tournament.service.imp.PlayerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -15,23 +14,26 @@ public class PlayerController {
     private PlayerServiceImpl playerService;
 
     @PostMapping("/player")
-    @PreAuthorize("hasRole('ADMIN')")
-    public void createPlayer(@RequestBody Player player) {
+//    @PreAuthorize("hasRole('ADMIN')")
+    public String createPlayer(@RequestBody Player player) {
         System.out.println("PlayerController.createPlayer");
         playerService.save(player);
+        return "Player saved";
     }
 
     @GetMapping("/player/{id}")
     public Player findPlayer(@PathVariable int id) {
         System.out.println("PlayerController.findPlayer");
-        return playerService.findById(id);
+        Player player= playerService.findById(id);
+        return player;
     }
 
-    @DeleteMapping("/player/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
-    public void deletePlayer(@PathVariable int id) {
+    @DeleteMapping("/delete/player/{id}")
+//    @PreAuthorize("hasRole('ADMIN')")
+    public String deletePlayer(@PathVariable int id) {
         System.out.println("PlayerController.deletePlayer");
         playerService.deleteById(id);
+        return "Player deleted";
     }
 
     @GetMapping("/players")
@@ -41,10 +43,12 @@ public class PlayerController {
     }
 
     @PutMapping("/player")
-    @PreAuthorize("hasRole('ADMIN')")
-    public void updatePlayer(@RequestBody Player player) {
+//    @PreAuthorize("hasRole('ADMIN')")
+    public String updatePlayer(@RequestBody Player player) {
         System.out.println("PlayerController.updatePlayer");
         playerService.save(player);
+        return "Player updated";
     }
 
 }
+

@@ -51,4 +51,15 @@ public class SignupRequest {
     public void setRole(Set<String> role) {
       this.role = role;
     }
+
+    @Override
+    public String toString() {
+        return "SignupRequest{" +
+                "username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
+
+
 }

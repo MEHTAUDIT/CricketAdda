@@ -6,8 +6,6 @@ import lombok.Setter;
 
 import java.util.List;
 
-@Getter
-@Setter
 public class UserInfoResponse {
 	private Long id;
 	private String username;
@@ -23,6 +21,59 @@ public class UserInfoResponse {
 		this.email = email;
 		this.roles = roles;
 		this.jwtToken = jwtToken;
+	}
+
+	
+
+	public Long getId() {
+		return id;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public List<String> getRoles() {
+		return roles;
+	}
+
+	public String getJwtToken() {
+		return jwtToken;
+	}
+
+	public void setJwtToken(String jwtToken) {
+		this.jwtToken = jwtToken;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setRoles(List<String> roles) {
+		this.roles = roles;
+	}
+
+	@Override
+	public String toString() {
+		return "UserInfoResponse{" +
+				"id=" + id +
+				", username='" + username + '\'' +
+				", email='" + email + '\'' +
+				", roles=" + roles +
+				", jwtToken='" + jwtToken + '\'' +
+				'}';
 	}
 
 

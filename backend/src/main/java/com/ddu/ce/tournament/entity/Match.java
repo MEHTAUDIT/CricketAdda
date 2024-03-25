@@ -1,6 +1,7 @@
 package com.ddu.ce.tournament.entity;
 
 import jakarta.persistence.*;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.util.Date;
 
@@ -28,6 +29,15 @@ public class Match {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "tournament_id")
     private Tournament tournament;
+
+    @Value("0")
+    private int team1_score;
+    @Value("0")
+    private int team2_score;
+    @Value("0")
+    private int team1_wickets;
+    @Value("0")
+    private int team2_wickets;
 
 
     private int winner;
@@ -88,6 +98,41 @@ public class Match {
         this.tournament = tournament;
     }
 
+
+    public int getTeam1_score() {
+        return team1_score;
+    }
+
+    public void setTeam1_score(int team1_score) {
+        this.team1_score = team1_score;
+    }
+
+    public int getTeam2_score() {
+        return team2_score;
+    }
+
+    public void setTeam2_score(int team2_score) {
+        this.team2_score = team2_score;
+    }
+
+    public int getTeam1_wickets() {
+        return team1_wickets;
+    }
+
+    public void setTeam1_wickets(int team1_wickets) {
+        this.team1_wickets = team1_wickets;
+    }
+
+    public int getTeam2_wickets() {
+        return team2_wickets;
+    }
+
+    public void setTeam2_wickets(int team2_wickets) {
+        this.team2_wickets = team2_wickets;
+    }
+
+    public Match() {
+    }
 
 
 
