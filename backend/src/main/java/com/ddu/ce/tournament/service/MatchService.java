@@ -8,4 +8,6 @@ public interface MatchService {
     void deleteById(int id);
     Iterable<Match> findAll();
     void deleteAll();
+
+    Match updateMatchScore( int matchId, int team1Score, int team2Score, int team1Wickets, int team2Wickets);
 }

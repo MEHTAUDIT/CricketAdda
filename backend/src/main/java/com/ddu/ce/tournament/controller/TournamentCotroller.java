@@ -1,17 +1,14 @@
 package com.ddu.ce.tournament.controller;
 
 import com.ddu.ce.tournament.entity.Match;
-import com.ddu.ce.tournament.entity.Player;
 import com.ddu.ce.tournament.entity.Team;
 import com.ddu.ce.tournament.entity.Tournament;
 import com.ddu.ce.tournament.payload.request.MatchRequest;
-import com.ddu.ce.tournament.service.imp.PlayerServiceImpl;
 import com.ddu.ce.tournament.service.imp.TournamentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.List;
 
 @RestController
