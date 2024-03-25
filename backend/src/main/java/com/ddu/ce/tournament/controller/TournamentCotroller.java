@@ -32,9 +32,10 @@ public class TournamentCotroller {
 
     @GetMapping("/tournament/{id}")
 //    @PreAuthorize("hasRole('ADMIN')")
-    public Tournament findTournament(@PathVariable int id) {
-        System.out.println("TournamentController.findTournament");
-        return tournamentService.findById(id);
+    public ResponseEntity<?> findTournament(@PathVariable int id) {
+//        System.out.println("TournamentController.findTournament");
+
+        return  ResponseEntity.ok().body(new TournamentInfoResponse(tournamentService.findById(id)));
     }
 
     @DeleteMapping("/tournament/{id}")
@@ -46,7 +47,7 @@ public class TournamentCotroller {
     }
 
     @GetMapping("/tournaments")
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> findAllTournaments() {
         System.out.println("TournamentCotroller.findAllTournaments");
         List<Tournament> tournaments = tournamentService.findAll();

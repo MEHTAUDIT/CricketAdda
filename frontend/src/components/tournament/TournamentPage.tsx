@@ -12,25 +12,21 @@ import {
 } from "@/components/ui/table";
 import AddMatch from "../match/AddMatch";
 import AddTeam from "../team/AddTeam";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 
 export default function TournamentPage( props : any) {
   const { id } = useParams();
 
   
   useEffect(() => {
-    document.title = `Tournament`;
   
-    console.log("inside tournament page + " , props.user);
     fetchTournament();
     fetchMatches();
     fetchTeams();
   }, []);
 
   const fetchTournament = async () => {
-    console.log("fetching tournament");
-    console.log("inside user " + props.user?.username);
-    console.log("inside user " + props.user?.jwtToken);
+
     const response = await axios.get(
       `http://localhost:8080/api/tournament/${id}` ,
       {

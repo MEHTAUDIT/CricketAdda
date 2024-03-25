@@ -69,7 +69,7 @@ export default function Login() {
 
   return (
     <div>
-      <h1 className="text-3xl mb-10">Host new Tournament</h1>
+      {/* <h1 className="text-3xl mb-10">Login</h1> */}
 
       
       <div>
@@ -94,7 +94,7 @@ export default function Login() {
             />
           </div>
         </div>
-        <Button onClick={handleSubmit}>Login</Button>
+        <Button onClick={handleSubmit} className="mt-4">Login</Button>
       </div>
     </div>
   );

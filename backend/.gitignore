@@ -1,6 +1,6 @@
 #env files
 src/main/resources/env.properties
-
+!**/src/main/**/env.properties
 
 HELP.md
 target/

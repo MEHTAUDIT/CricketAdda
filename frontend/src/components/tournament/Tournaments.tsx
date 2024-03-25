@@ -41,7 +41,7 @@ export default function Tournaments() {
 
         <div className='grid grid-cols-3 gap-4 mt-5'>
             {tournaments.map((tournament ,  i) => (
-                <Card key={i} className='bg-gray-100 p-4 rounded-lg cursor-pointer space-y-2' onClick={()=> navigate(`/tournaments/${tournament.id}`)}>
+                <Card key={i} className='bg-gray-100 p-4 rounded-lg cursor-pointer space-y-2' onClick={()=> navigate(`/tournaments/${tournament.tournament_id}`)}>
                     <h2 className='text-xl'>{tournament.tournament_name}</h2>
                     <p>Format : {tournament.tournament_type}</p>
                     <p>Date : {tournament.start_date}</p>
