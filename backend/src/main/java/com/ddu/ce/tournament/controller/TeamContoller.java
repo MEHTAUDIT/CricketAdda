@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "*"  )
+@CrossOrigin(origins = "http://localhost:5173")
 public class TeamContoller {
 
     @Autowired
@@ -39,7 +39,7 @@ public class TeamContoller {
     }
 
     @GetMapping("/teams")
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     public Iterable<Team> findAllTeams() {
         System.out.println("TeamContoller.findAllTeams");
         return teamService.findAll();
@@ -61,8 +61,7 @@ public class TeamContoller {
     @GetMapping("team/{team_id}/players")
     public List<Player> getPlayers(@PathVariable int team_id) {
 
-        List<Player> players = teamService.getPlayers(team_id);
-        return players;
+        return teamService.getPlayers(team_id);
     }
 
 

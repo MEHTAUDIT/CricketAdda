@@ -39,6 +39,11 @@ const components: { title: string; href: string; description: string }[] = [
     description:
       "All the players that have participated in the tournaments are listed here.",
   },
+  {
+    title : "Create Team",
+    href : "/teams/new",
+    description : "Create a new team and add players to your team."
+  }
   
   
 ]
@@ -89,7 +94,7 @@ export function Navbar() {
         </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>
-      {user? user.username : ""}
+      {user? <Button className="ml-auto " variant={"outline"}>{user.username}</Button> : ""}
       { !user    &&
         <Button className="ml-auto"><Link to="/login">Login</Link></Button>
       }

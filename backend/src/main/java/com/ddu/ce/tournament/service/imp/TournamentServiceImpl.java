@@ -76,7 +76,7 @@ public class TournamentServiceImpl implements com.ddu.ce.tournament.service.Tour
         return matches;
     }
 
-    public void addMatchToTournament(int tournament_id, int team1_id, int team2_id , Date match_date ){
+    public void addMatchToTournament(int tournament_id, int team1_id, int team2_id , String match_date ){
         Match match = new Match();
         match.setTeam1(teamDAO.findById(team1_id).get());
         match.setTeam2(teamDAO.findById(team2_id).get());

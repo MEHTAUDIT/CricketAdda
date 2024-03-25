@@ -23,7 +23,7 @@ public class Match {
     private Team team2;
 
     @Temporal(TemporalType.DATE)
-    private Date match_date;
+    private String match_date;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "tournament_id")
@@ -72,11 +72,11 @@ public class Match {
         this.winner = winner;
     }
 
-    public Date getMatch_date() {
+    public String getMatch_date() {
         return match_date;
     }
 
-    public void setMatch_date(Date match_date) {
+    public void setMatch_date(String match_date) {
         this.match_date = match_date;
     }
 

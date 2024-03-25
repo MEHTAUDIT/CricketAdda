@@ -22,6 +22,7 @@ import {
 import { Label } from "../ui/label";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
 
 export default function AddTeam(props: any) {
   // const [ teamForm, setTeamForm ] = useState({
@@ -35,22 +36,35 @@ export default function AddTeam(props: any) {
   //     [e.target.name]: e.target.value,
   //   });
   // };
+  const user = useSelector((state: any) => state.user.user) || null;
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    console.log("team id is " + teamId , "tournament id is " + props.tournament_id);
+    try {
+      await axios.get(
+        `http://localhost:8080/api/tournament/${props.tournament_id}/addteam/${teamId}`,
 
-    const response = await axios.get(
-      `http://localhost:8080/api/tournament/${props.tournament_id}/addteam/${teamId}`,
-    );
+        {
+          headers: {
+            Authorization: `Bearer ${user?.jwtToken}`,
+          },
+          withCredentials: true,
+        }
 
-    if (response.status === 200) {
-      console.log("Team added successfully");
-      toast.success("Team added successfully");
-    } else if (response.status === 400) {
-      console.log("Error adding team");
+        
+        
+
+      );
+      toast.success("Team Added to the tournament");
+
+  
     }
-    console.log(teamId);
+    catch (err : any) {
+      toast.error("Failed to add team, check you have authourization to add team");
+    }
+   
+
+    
     
 
   };
@@ -58,15 +72,18 @@ export default function AddTeam(props: any) {
   const [teams , setTeams] = useState<any[]>([]);
 
   useEffect(() => {
+    
     fetchTeams();
   } , []);
 
   const fetchTeams = async () => {
     console.log("fetching teams");
     const response = await axios.get(
-      `http://localhost:8080/api/teams`
+      `http://localhost:8080/api/teams`,
     );
     setTeams(response.data);
+   
+    
    
   }
 

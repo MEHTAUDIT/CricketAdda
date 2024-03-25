@@ -14,7 +14,7 @@ public class MatchRequest {
     private int team1_id;
     private int team2_id;
     private int tournament_id;
-    private Date match_date;
+    private String match_date;
 
 
 }

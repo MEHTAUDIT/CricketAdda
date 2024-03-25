@@ -17,15 +17,26 @@ export default function Login() {
   
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  
 
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    const response = await axios.post("http://127.0.0.1:8080/api/auth/login"  , loginForm);
+    const response = await axios.post("http://127.0.0.1:8080/api/auth/login"  , loginForm , 
+      {
+        withCredentials: true
+      }
+    
+    );
 
     if(response.data){
         toast.success('Login Successfull')
-        console.log(response.data)
+        // console.log(response.data)
+
+       
+        document.cookie = `jwtToken=${response.data.jwtToken}; path=/api;`
+
+        
         
         dispatch({
             type: 'SET_USER',
