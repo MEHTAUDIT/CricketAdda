@@ -1,6 +1,7 @@
 package com.ddu.ce.tournament.service;
 
 import com.ddu.ce.tournament.entity.Match;
+import com.ddu.ce.tournament.entity.Team;
 
 public interface MatchService {
     String save(Match match);
@@ -10,4 +11,14 @@ public interface MatchService {
     void deleteAll();
 
     Match updateMatchScore( int matchId, int team1Score, int team2Score, int team1Wickets, int team2Wickets);
+
+    Team setmatchwinner(int matchId,int TeamId);
+
+    Team setfirstbattingTeam(int matchId, int teamId);
+
+    Team getmatchwinner(int matchId);
+
+    String updatematchstatus(int matchId);
+
+
 }

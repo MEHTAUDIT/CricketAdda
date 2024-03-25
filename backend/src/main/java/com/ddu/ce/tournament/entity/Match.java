@@ -39,8 +39,20 @@ public class Match {
     @Value("0")
     private int team2_wickets;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "winner_id")
+    private Team winner;
 
-    private int winner;
+    @ManyToOne
+    private Team firstbattingteam;
+
+    public Team getFirstbattingteam() {
+        return firstbattingteam;
+    }
+
+    public void setFirstbattingteam(Team firstbattingteam) {
+        this.firstbattingteam = firstbattingteam;
+    }
 
     public int getId() {
         return id;
@@ -74,11 +86,11 @@ public class Match {
         this.team2 = team2;
     }
 
-    public int getWinner() {
+    public Team getWinner() {
         return winner;
     }
 
-    public void setWinner(int winner) {
+    public void setWinner(Team winner) {
         this.winner = winner;
     }
 
@@ -134,6 +146,22 @@ public class Match {
     public Match() {
     }
 
-
+    @Override
+    public String toString() {
+        return "Match{" +
+                "id=" + id +
+                ", match_status='" + match_status + '\'' +
+                ", team1=" + team1 +
+                ", team2=" + team2 +
+                ", match_date=" + match_date +
+                ", tournament=" + tournament +
+                ", team1_score=" + team1_score +
+                ", team2_score=" + team2_score +
+                ", team1_wickets=" + team1_wickets +
+                ", team2_wickets=" + team2_wickets +
+                ", winner=" + winner +
+                ", firstbattingteam=" + firstbattingteam +
+                '}';
+    }
 
 }

@@ -84,7 +84,6 @@ public class TournamentServiceImpl implements com.ddu.ce.tournament.service.Tour
         match.setTeam1(teamDAO.findById(team1_id).get());
         match.setTeam2(teamDAO.findById(team2_id).get());
         match.setMatch_status("upcoming");
-        match.setWinner(0);
         match.setMatch_date(match_date);
         match.setTournament(findById(tournament_id));
         matchDAO.save(match);

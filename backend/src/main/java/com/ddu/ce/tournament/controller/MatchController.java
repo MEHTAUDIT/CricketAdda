@@ -1,6 +1,7 @@
 package com.ddu.ce.tournament.controller;
 
 import com.ddu.ce.tournament.entity.Match;
+import com.ddu.ce.tournament.entity.Team;
 import com.ddu.ce.tournament.payload.request.UpdateMatchScore;
 import com.ddu.ce.tournament.payload.response.MatchScoreResponse;
 import com.ddu.ce.tournament.payload.response.UserInfoResponse;
@@ -41,7 +42,6 @@ public class MatchController {
         return matchService.findById(id);
     }
 
-
     @DeleteMapping("/match/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public String deleteMatch(@PathVariable int id) {
@@ -64,9 +64,8 @@ public class MatchController {
         return "Match updated";
     }
 
-
     @PutMapping("/match/updatescore")
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> updateMatchScore(@RequestBody UpdateMatchScore updateMatchScore) {
         System.out.println("MatchController.updateMatchScore");
         Match match= matchService.updateMatchScore(updateMatchScore.getMatchId(), updateMatchScore.getTeam1Score(), updateMatchScore.getTeam2Score(), updateMatchScore.getTeam1Wickets(), updateMatchScore.getTeam2Wickets());
@@ -74,5 +73,28 @@ public class MatchController {
                 .body(new MatchScoreResponse(match.getId() , match.getTeam1().getTeam_name() , match.getTeam2().getTeam_name() , match.getTeam1_score() , match.getTeam2_score() , match.getTeam1_wickets() , match.getTeam2_wickets()));
     }
 
+    @PostMapping("/match/{matchId}/team/{teamId}/winner")
+    public Team setMatchWinner(@PathVariable int matchId, @PathVariable int teamId) {
+        System.out.println("MatchController.setMatchWinner");
+        return matchService.setmatchwinner(matchId, teamId);
+    }
+
+    @PostMapping("/match/{matchId}/team/{teamId}/firstbatting")
+    public Team setFirstBattingTeam(@PathVariable int matchId, @PathVariable int teamId) {
+        System.out.println("MatchController.setFirstBattingTeam");
+        return matchService.setfirstbattingTeam(matchId, teamId);
+    }
+
+    @GetMapping("/match/{matchId}/winner")
+    public Team getMatchWinner(@PathVariable int matchId) {
+        System.out.println("MatchController.getMatchWinner");
+        return matchService.getmatchwinner(matchId);
+    }
+
+    @PutMapping("/match/{matchId}/updatestatus")
+    public String updateMatchStatus(@PathVariable int matchId) {
+        System.out.println("MatchController.updateMatchStatus");
+        return matchService.updatematchstatus(matchId);
+    }
 
 }

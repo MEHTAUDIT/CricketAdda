@@ -1,6 +1,7 @@
 package com.ddu.ce.tournament.service;
 
 import com.ddu.ce.tournament.entity.Player;
+import com.ddu.ce.tournament.entity.Team;
 
 import java.util.List;
 
