@@ -72,6 +72,12 @@ public class TeamServiceImpl implements com.ddu.ce.tournament.service.TeamServic
         return players;
     }
 
+    public void removePlayerFromTeam(int team_id, int player_id) {
+        Player player = playerDAO.findById(player_id).get();
+        player.setTeam(null);
+        playerDAO.save(player);
+    }
+
 
 
 }

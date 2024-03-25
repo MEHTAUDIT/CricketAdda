@@ -62,7 +62,7 @@ public class MatchController {
 
 
     @PutMapping("/match/updatescore")
-//    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> updateMatchScore(@RequestBody UpdateMatchScore updateMatchScore) {
         System.out.println("MatchController.updateMatchScore");
         Match match= matchService.updateMatchScore(updateMatchScore.getMatchId(), updateMatchScore.getTeam1Score(), updateMatchScore.getTeam2Score(), updateMatchScore.getTeam1Wickets(), updateMatchScore.getTeam2Wickets());
