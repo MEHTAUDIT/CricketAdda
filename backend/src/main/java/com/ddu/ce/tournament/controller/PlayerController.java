@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "http://localhost:5173"  )
+@CrossOrigin(origins = "http://localhost:5173")
 public class PlayerController {
     @Autowired
     private PlayerServiceImpl playerService;
 
     @PostMapping("/player")
-//    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public String createPlayer(@RequestBody Player player) {
         System.out.println("PlayerController.createPlayer");
         playerService.save(player);
@@ -29,7 +29,7 @@ public class PlayerController {
     }
 
     @DeleteMapping("/delete/player/{id}")
-//    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public String deletePlayer(@PathVariable int id) {
         System.out.println("PlayerController.deletePlayer");
         playerService.deleteById(id);
@@ -43,9 +43,9 @@ public class PlayerController {
     }
 
     @PutMapping("/player")
-//    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public String updatePlayer(@RequestBody Player player) {
-        System.out.println("PlayerController.updatePlayer");
+//        System.out.println("PlayerController.updatePlayer");
         playerService.save(player);
         return "Player updated";
     }
