@@ -53,9 +53,9 @@ public class TournamentCotroller {
         List<Tournament> tournaments = tournamentService.findAll();
 
         List<TournamentInfoResponse> tournamentInfoResponses = tournaments.stream().map(TournamentInfoResponse::new).collect(Collectors.toList());
-        for (TournamentInfoResponse tournamentInfoResponse : tournamentInfoResponses) {
-            System.out.println(tournamentInfoResponse);
-        }
+//        for (TournamentInfoResponse tournamentInfoResponse : tournamentInfoResponses) {
+//            System.out.println(tournamentInfoResponse);
+//        }
         return ResponseEntity.ok().body(tournamentInfoResponses);
     }
 
