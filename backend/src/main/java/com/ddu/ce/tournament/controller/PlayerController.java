@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "*")
 public class PlayerController {
     @Autowired
     private PlayerServiceImpl playerService;
@@ -28,7 +28,7 @@ public class PlayerController {
         return player;
     }
 
-    @DeleteMapping("/delete/player/{id}")
+    @PostMapping("/player/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public String deletePlayer(@PathVariable int id) {
         System.out.println("PlayerController.deletePlayer");

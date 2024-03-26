@@ -47,7 +47,7 @@ public class TournamentCotroller {
     }
 
     @GetMapping("/tournaments")
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> findAllTournaments() {
         System.out.println("TournamentCotroller.findAllTournaments");
         List<Tournament> tournaments = tournamentService.findAll();
@@ -92,8 +92,9 @@ public class TournamentCotroller {
     @PreAuthorize("hasRole('ADMIN')")
     public String addMatchToTournament(@RequestBody MatchRequest request) {
         System.out.println("TournamentCotroller.addMatchToTournament");
-        tournamentService.addMatchToTournament(request.getTournament_id(), request.getTeam1_id(), request.getTeam2_id() , request.getMatch_date() );
+        System.out.println(request);
         return "Match added to tournament";
+//        return tournamentService.addMatchToTournament(request.getTournament_id(), request.getTeam1_id(), request.getTeam2_id() , request.getMatch_date() );
     }
 
     @PostMapping("/tournament/check")

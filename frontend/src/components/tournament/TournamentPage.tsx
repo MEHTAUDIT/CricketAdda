@@ -72,7 +72,15 @@ export default function TournamentPage() {
             {matches.map((match, i) => (
             <Card key={i} className="bg-gray-100 p-4 rounded-lg cursor-pointer space-y-2">
                 <h2 className="text-xl">{match.team1.team_name} vs {match.team2.team_name}</h2>
-                <p>Status : {match.match_status}</p>
+                <p>Status : <span className="text-blue-500">{match.match_status}</span></p>
+                { match.winner && 
+                <p>Winner : <span className="text-green-600">{match.winner?.team_name}</span></p> 
+                }
+                
+                <p className="text-sm">{match.team1.team_name} : {match.team1_score}-{match.team1_wickets}</p>  
+                <p className="text-sm">{match.team2.team_name} : {match.team2_score}-{match.team2_wickets}</p>  
+
+                
                 <p>Date : {match.match_date}</p>
             </Card>
             ))}

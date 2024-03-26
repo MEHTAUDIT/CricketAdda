@@ -41,6 +41,7 @@ public class Match {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "winner_id")
+    @Value("null")
     private Team winner;
 
     @ManyToOne

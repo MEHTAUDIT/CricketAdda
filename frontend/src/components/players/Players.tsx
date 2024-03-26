@@ -9,10 +9,13 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import EditPlayer from "./EditPlayer";
+import { Button } from "../ui/button";
+import { useSelector } from "react-redux";
+import toast from "react-hot-toast";
 
 export default function Players() {
   useEffect(() => {
-    document.title = "All Tournaments";
+    document.title = "All Players";
     fetchTournaments();
   }, []);
 
@@ -21,6 +24,29 @@ export default function Players() {
     setPlayers(response.data);
   };
 
+  const deletePlayer = (id: any) => async () => {
+    // console.log(id);
+    // console.log(user.jwtToken)
+    
+    try {
+      await axios.post(`http://localhost:8080/api/player/${id}` , 
+      {
+        headers : {
+          Authorization : `Bearer ${user?.jwtToken}`
+        },
+        withCredentials: true,
+      }
+      
+      );
+      toast.success("Player Deleted");
+      fetchTournaments();
+    } catch (err: any) {
+      toast.error("Failed to delete player");
+      console.error(err);
+    }
+  }
+
+  const user = useSelector((state: any) => state.user.user) || null;
   const [players, setPlayers] = useState<any[]>([]);
 
   const player = {
@@ -59,6 +85,11 @@ export default function Players() {
               <TableCell>
                   <EditPlayer player={player} text={"Edit"}/>
               </TableCell>
+              <TableCell>
+                  <Button variant={"destructive"} onClick={deletePlayer(player.id)}>Delete</Button>
+              </TableCell>
+
+
             </TableRow>
           ))}
         </TableBody>

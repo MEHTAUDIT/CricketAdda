@@ -41,7 +41,7 @@ public class TeamContoller {
     }
 
     @GetMapping("/teams")
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     public Iterable<Team> findAllTeams() {
         System.out.println("TeamContoller.findAllTeams");
         return teamService.findAll();

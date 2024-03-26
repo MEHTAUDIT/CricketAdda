@@ -20,5 +20,5 @@ public interface TournamentService {
 
     List<Match> getMatches(int tournament_id);
 
-    String addMatchToTournament(int tournament_id, int team1_id, int team2_id , String match_date); ;
+    public String addMatchToTournament(int tournament_id, int team1_id, int team2_id , String match_date );
 }

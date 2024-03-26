@@ -44,7 +44,8 @@ export default function AddMatch(props: any) {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    
+    console.log(matchForm)
+    console.log(user.jwtToken)
     try{
       const response = await axios.post('http://localhost:8080/api/tournament/addmatch' , matchForm , 
         {
