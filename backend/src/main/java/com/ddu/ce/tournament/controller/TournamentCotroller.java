@@ -31,7 +31,7 @@ public class TournamentCotroller {
     }
 
     @GetMapping("/tournament/{id}")
-//    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> findTournament(@PathVariable int id) {
 //        System.out.println("TournamentController.findTournament");
 
@@ -47,7 +47,7 @@ public class TournamentCotroller {
     }
 
     @GetMapping("/tournaments")
-//    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> findAllTournaments() {
         System.out.println("TournamentCotroller.findAllTournaments");
         List<Tournament> tournaments = tournamentService.findAll();

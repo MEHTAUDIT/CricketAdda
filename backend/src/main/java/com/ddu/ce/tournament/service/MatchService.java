@@ -12,13 +12,12 @@ public interface MatchService {
 
     Match updateMatchScore( int matchId, int team1Score, int team2Score, int team1Wickets, int team2Wickets);
 
-    Team setmatchwinner(int matchId,int TeamId);
+    Team setmatchwinner(int matchId);
 
     Team setfirstbattingTeam(int matchId, int teamId);
 
     Team getmatchwinner(int matchId);
 
-    String updatematchstatus(int matchId);
 
 
 }

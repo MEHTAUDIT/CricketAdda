@@ -29,7 +29,7 @@ public class MatchController {
     }
 
    @PostMapping("/match")
-//   @PreAuthorize("hasRole('ADMIN')")
+   @PreAuthorize("hasRole('ADMIN')")
     public String createMatch(@RequestBody Match match) {
         System.out.println("MatchController.createMatch");
         matchService.save(match);
@@ -73,10 +73,10 @@ public class MatchController {
                 .body(new MatchScoreResponse(match.getId() , match.getTeam1().getTeam_name() , match.getTeam2().getTeam_name() , match.getTeam1_score() , match.getTeam2_score() , match.getTeam1_wickets() , match.getTeam2_wickets()));
     }
 
-    @PostMapping("/match/{matchId}/team/{teamId}/winner")
-    public Team setMatchWinner(@PathVariable int matchId, @PathVariable int teamId) {
+    @PostMapping("/match/{matchId}/winner")
+    public Team setMatchWinner(@PathVariable int matchId) {
         System.out.println("MatchController.setMatchWinner");
-        return matchService.setmatchwinner(matchId, teamId);
+        return matchService.setmatchwinner(matchId);
     }
 
     @PostMapping("/match/{matchId}/team/{teamId}/firstbatting")
@@ -89,12 +89,6 @@ public class MatchController {
     public Team getMatchWinner(@PathVariable int matchId) {
         System.out.println("MatchController.getMatchWinner");
         return matchService.getmatchwinner(matchId);
-    }
-
-    @PutMapping("/match/{matchId}/updatestatus")
-    public String updateMatchStatus(@PathVariable int matchId) {
-        System.out.println("MatchController.updateMatchStatus");
-        return matchService.updatematchstatus(matchId);
     }
 
 }
