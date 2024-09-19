@@ -11,7 +11,20 @@ CricketAdda is a comprehensive application designed to simplify the management o
 
 - **Backend**: Java Spring-Boot REST API 
 - **Frontend**: React, Shadcn UI
-- **Database**: MySQL
+- **Database**: PostgreSQL
+
+## Preview
+
+<img src="./assets/1.png" alt="1" width="700"/>
+
+<img src="./assets/2.png" alt="2" width="700"/>
+
+<img src="./assets/3.png" alt="3" width="700"/>
+
+<img src="./assets/4.png" alt="4" width="700"/>
+
+
+
 
 
 ## Setup Guide
@@ -20,7 +33,7 @@ CricketAdda is a comprehensive application designed to simplify the management o
 Before setting up CricketAdda, ensure you have the following installed:
 - Java Development Kit (JDK)
 - Node.js and npm
-- MySQL Server
+- PostgreSQL Server
 
 ### Backend Setup
 1. Clone the CricketAdda repository.
