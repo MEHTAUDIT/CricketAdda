@@ -4,15 +4,10 @@ import com.ddu.ce.tournament.entity.Match;
 import com.ddu.ce.tournament.entity.Team;
 import com.ddu.ce.tournament.payload.request.UpdateMatchScore;
 import com.ddu.ce.tournament.payload.response.MatchScoreResponse;
-import com.ddu.ce.tournament.payload.response.UserInfoResponse;
-import com.ddu.ce.tournament.service.MatchService;
 import com.ddu.ce.tournament.service.imp.MatchServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

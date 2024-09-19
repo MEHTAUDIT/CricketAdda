@@ -6,6 +6,8 @@ import com.ddu.ce.tournament.dao.TournamentDAO;
 import com.ddu.ce.tournament.entity.Match;
 import com.ddu.ce.tournament.entity.Team;
 import com.ddu.ce.tournament.entity.Tournament;
+import com.ddu.ce.tournament.payload.request.TournamentRequest;
+import com.ddu.ce.tournament.service.TournamentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,16 +15,19 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-public class TournamentServiceImpl implements com.ddu.ce.tournament.service.TournamentService{
+public class TournamentServiceImpl implements TournamentService {
 
     private TournamentDAO tournamentDAO;
     private TeamDAO teamDAO;
     private MatchDAO matchDAO;
+
+    private UserService userService;
     @Autowired
-    public TournamentServiceImpl(TournamentDAO tournamentDAO , TeamDAO teamDAO , MatchDAO matchDAO) {
+    public TournamentServiceImpl(TournamentDAO tournamentDAO , TeamDAO teamDAO , MatchDAO matchDAO , UserService userService) {
         this.tournamentDAO = tournamentDAO;
         this.teamDAO = teamDAO;
         this.matchDAO = matchDAO;
+        this.userService = userService;
     }
 
     public TournamentDAO getTournamentDAO() {
@@ -33,9 +38,21 @@ public class TournamentServiceImpl implements com.ddu.ce.tournament.service.Tour
         this.tournamentDAO = tournamentDAO;
     }
 
-    public String save(Tournament tournament) {
-        tournamentDAO.save(tournament);
+    public String save(TournamentRequest tournament) {
+
+        Tournament tournament1 = new Tournament();
+        tournament1.setTournament_name(tournament.getTournament_name());
+        tournament1.setTournament_type(tournament.getTournament_type());
+        tournament1.setStart_date(tournament.getStart_date());
+        tournament1.setOwner(userService.findUserByEmail(tournament.getOwner_email()).get());
+
+        tournamentDAO.save(tournament1);
         return "Tournament saved";
+    }
+
+    public String update(Tournament tournament) {
+        tournamentDAO.save(tournament);
+        return "Tournament updated";
     }
 
     public Tournament findById(int id) {

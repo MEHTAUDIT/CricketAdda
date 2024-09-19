@@ -33,7 +33,6 @@ public class TeamContoller {
     }
 
     @DeleteMapping("/team/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
     public String deleteTeam(@PathVariable int id) {
         System.out.println("TeamContoller.deleteTeam");
         teamService.deleteById(id);
@@ -48,7 +47,7 @@ public class TeamContoller {
     }
 
     @PutMapping("/team")
-    @PreAuthorize("hasRole('ADMIN')")
+
     public String updateTeam(@RequestBody Team team) {
         System.out.println("TeamContoller.updateTeam");
         teamService.save(team);
@@ -56,7 +55,6 @@ public class TeamContoller {
     }
 
     @GetMapping("team/{team_id}/addplayer/{player_id}")
-    @PreAuthorize("hasRole('ADMIN')")
     public String addPlayerToTeam(@PathVariable int team_id, @PathVariable int player_id) {
 
         teamService.addPlayerToTeam(team_id, player_id);
@@ -71,7 +69,6 @@ public class TeamContoller {
 
 
     @DeleteMapping("/delete/team/{team_id}/deleteplayer/{player_id}")
-    @PreAuthorize("hasRole('ADMIN')")
     public String deletePlayerFromTeam(@PathVariable int team_id, @PathVariable int player_id) {
         teamService.deletePlayerFromTeam(team_id, player_id);
         return "Player deleted from team";

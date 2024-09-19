@@ -4,6 +4,7 @@ import com.ddu.ce.tournament.entity.Match;
 import com.ddu.ce.tournament.entity.Team;
 import com.ddu.ce.tournament.entity.Tournament;
 import com.ddu.ce.tournament.payload.request.MatchRequest;
+import com.ddu.ce.tournament.payload.request.TournamentRequest;
 import com.ddu.ce.tournament.payload.response.TournamentInfoResponse;
 import com.ddu.ce.tournament.service.imp.TournamentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,15 +24,13 @@ public class TournamentCotroller {
     private TournamentServiceImpl tournamentService;
 
     @PostMapping("/tournament")
-    @PreAuthorize("hasRole('ADMIN')")
-    public String createTournament(@RequestBody Tournament tournament) {
+    public String createTournament(@RequestBody TournamentRequest tournament) {
         System.out.println("TournamentController.createTournament");
         tournamentService.save(tournament);
         return "Tournament saved";
     }
 
     @GetMapping("/tournament/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> findTournament(@PathVariable int id) {
 //        System.out.println("TournamentController.findTournament");
 
@@ -60,15 +59,13 @@ public class TournamentCotroller {
     }
 
     @PutMapping("/tournament")
-    @PreAuthorize("hasRole('ADMIN')")
     public String updateTournament(@RequestBody Tournament tournament) {
         System.out.println("TournamentCotroller.updateTournament");
-        tournamentService.save(tournament);
+        tournamentService.update(tournament);
         return "Tournament updated";
     }
 
     @GetMapping("/tournament/{tournament_id}/addteam/{team_id}")
-    @PreAuthorize("hasRole('ADMIN')")
     public String addTeamToTournament(@PathVariable int tournament_id, @PathVariable int team_id) {
         System.out.println("TournamentCotroller.addTeamToTournament");
         tournamentService.addTeamToTournament(tournament_id, team_id);
@@ -89,7 +86,6 @@ public class TournamentCotroller {
     }
 
     @PostMapping("/tournament/addmatch")
-    @PreAuthorize("hasRole('ADMIN')")
     public String addMatchToTournament(@RequestBody MatchRequest request) {
         System.out.println("TournamentCotroller.addMatchToTournament");
         System.out.println(request);
@@ -98,7 +94,6 @@ public class TournamentCotroller {
     }
 
     @PostMapping("/tournament/check")
-    @PreAuthorize("hasRole('ADMIN')")
     public String check(@RequestBody String tournament_id) {
         return "tournament_id: " + tournament_id;
     }
