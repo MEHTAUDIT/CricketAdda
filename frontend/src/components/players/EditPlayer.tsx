@@ -40,7 +40,7 @@ export default function EditPlayer(props: any) {
   const fetchTeams = async () => {
     console.log("fetching teams");
     const response = await axios.get(
-      `http://localhost:8080/api/teams`,
+      `http://localhost:8080/api/teams`,  {withCredentials : true}
     );
     setTeams(response.data);
    
@@ -52,12 +52,9 @@ export default function EditPlayer(props: any) {
    
 
     try {
-      await axios.post( `http://localhost:8080/api/player` , player ,
+      await axios.post( `http://localhost:8080/api/player` , player , 
         {
-          headers : {
-            Authorization : `Bearer ${user?.jwtToken}`  
-          },
-          
+          withCredentials : true,
         }
       )
 

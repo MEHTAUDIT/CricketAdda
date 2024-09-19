@@ -11,10 +11,12 @@ import { Toaster } from 'react-hot-toast';
 import TournamentPage from './components/tournament/TournamentPage';
 import Home from './components/Home';
 import About from './components/About';
-import Login from './components/auth/Login';
 import { useEffect  } from 'react';
 import CreateTeam from './components/team/CreateTeam';
-// import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
+
+
 
 
 
@@ -22,34 +24,62 @@ import CreateTeam from './components/team/CreateTeam';
 function App() {
 
 
-  // const user = useSelector((state : any) => state.user.user) || {};
+  const {user} = useSelector((state : any) => state.user) || {};
 
   useEffect(() => {
     document.title = 'CricketAdda'
 
-    findUser();
-
-    
+    loadUser();    
   } , [])
+  
+  const dispatch = useDispatch();
 
 
-  const findUser = async () => {  
-    
-    const cookies = document.cookie.split(';');
-    // const jwtToken = cookies.find(cookie => cookie.startsWith('jwtToken=')).split('=')[1];
-    // i want to find cookie named jwtToken
-    // console.log(jwtToken);
-    // print all cookies
-    console.log(cookies);
-    const jwtToken = cookies.find(cookie => cookie.startsWith(' jwtToken='));
-    console.log(jwtToken?.split('=')[1]);
+  
 
-    
-   
+  const loadUser = async () => {
+
+    try {
+      const {data} = await axios.get("http://localhost:8080/api/user" , {withCredentials: true});
+      if(data) {
+        console.log(data);
+        dispatch({type: "SET_USER", payload
+        : data}); 
+      }
+    } catch (error) {
+      console.error(error);
+    }
+
+  };
+
+  let routes ;
+
+  console.log(user);
+  if(user){
+    routes = (
+      <Routes>
+        <Route path="/" element={<Home/>} />
+        <Route path="/tournaments" element={<Tournaments/>} />
+        <Route path="/tournaments/:id" element={<TournamentPage/>} />
+        <Route path="/tournaments/new" element={<AddTournament/>} />
+        <Route path="/players" element={<Players/>} />
+        <Route path='/about' element={<About/>}></Route>
+        <Route path='/teams/new' element={<CreateTeam/>}></Route>
+        <Route path='*' element={<Home/>}></Route>
+
+      </Routes>
+    )
   }
+  else {
 
-  
-  
+    routes = (
+      <Routes>
+        <Route path="/" element={<Home/>} />
+        <Route path='/about' element={<About/>}></Route>
+        <Route path="*" element={<Home/>}></Route>
+      </Routes>
+    )
+  }
 
   return (
     <div className=' font-secondary'>
@@ -61,17 +91,7 @@ function App() {
        
         <Toaster/>
         <div className='flex min-h-screen flex-col items-center mt-10'>
-          <Routes>
-            <Route path="/" element={<Home/>} />
-            <Route path="/tournaments" element={<Tournaments/>} />
-            <Route path="/tournaments/:id" element={<TournamentPage/>} />
-            <Route path="/tournaments/new" element={<AddTournament/>} />
-            <Route path="/players" element={<Players/>} />
-            <Route path='/about' element={<About/>}></Route>
-            <Route path='/login' element={<Login/>}></Route>
-            <Route path='/teams/new' element={<CreateTeam/>}></Route>
-
-          </Routes>
+          {routes}
         </div>
 
      

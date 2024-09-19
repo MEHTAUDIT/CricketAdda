@@ -20,7 +20,9 @@ export default function Players() {
   }, []);
 
   const fetchTournaments = async () => {
-    const response = await axios.get("http://localhost:8080/api/players");
+    const response = await axios.get("http://localhost:8080/api/players" ,  {
+      withCredentials : true
+    });
     setPlayers(response.data);
   };
 

@@ -34,7 +34,7 @@ export default function Login() {
         // console.log(response.data)
 
        
-        document.cookie = `jwtToken=${response.data.jwtToken}; path=/api;`
+        localStorage.setItem('jwtToken' , (response.data.jwtToken))
 
         
         

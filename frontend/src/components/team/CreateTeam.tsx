@@ -27,20 +27,14 @@ export default function CreateTeam() {
     
     try {
       console.log("team created" + user?.jwtToken);
-      console.log(teamForm  )
+      console.log(teamForm)
       await axios.post(
         "http://localhost:8080/api/team", teamForm, 
         {
-          headers: {
-            Authorization: `Bearer ${user?.jwtToken}`,
-          },
           withCredentials: true,
-        
         } );  
       toast.success("Team Created , you can now add players to the team");
       navigate("/players")
-
-      
     }
     catch (err : any) {
       toast.error("Failed to create team, check you have authourization to create team");
@@ -76,7 +70,7 @@ export default function CreateTeam() {
           </div>
           
         </div>
-        <Button onClick={handleSubmit}>Create Team</Button>
+        <Button onClick={handleSubmit} className="mt-3">Create Team</Button>
       </div>
     </div>
   );

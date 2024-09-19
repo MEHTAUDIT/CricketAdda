@@ -30,9 +30,7 @@ export default function TournamentPage() {
     const response = await axios.get(
       `http://localhost:8080/api/tournament/${id}` ,
       {
-        headers: {
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJLcmlzIiwiaWF0IjoxNzExMzA0NzIwLCJleHAiOjE3MTEzOTExMjB9.Q4ePWxlgImAouYx7QhoQpIvwQLY3_BxK2ub-fcUtRHc`,
-        },
+        withCredentials : true
       }
     );
     setTournament(response.data);
@@ -41,7 +39,7 @@ export default function TournamentPage() {
   const fetchMatches = async () => {
     console.log("fetching matches");
     const response = await axios.get(
-      `http://localhost:8080/api/tournament/${id}/matches`
+      `http://localhost:8080/api/tournament/${id}/matches` , { withCredentials : true}
     );
     setMatches(response.data);
   }
@@ -49,7 +47,7 @@ export default function TournamentPage() {
   const fetchTeams = async () => {
     console.log("fetching teams");
     const response = await axios.get(
-      `http://localhost:8080/api/tournament/${id}/teams`
+      `http://localhost:8080/api/tournament/${id}/teams` , {withCredentials : true}
     );
     setTeams(response.data);
   }

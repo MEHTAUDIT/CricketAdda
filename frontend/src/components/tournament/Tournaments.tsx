@@ -2,7 +2,7 @@ import  {useEffect , useState} from 'react'
 import axios from 'axios'
 import { Card } from '../ui/card'
 import { useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+// import { useSelector } from 'react-redux'
 
 
 
@@ -15,14 +15,12 @@ export default function Tournaments() {
         fetchTournaments()
     }   , [])
 
-    const user = useSelector((state : any) => state.user.user) || null;
+    // const user = useSelector((state : any) => state.user.user) || null;
 
     const fetchTournaments = async () => {
         const response = await axios.get('http://localhost:8080/api/tournaments' ,
         {
-            headers: {
-                Authorization: `Bearer ${user?.jwtToken}`
-            }
+            withCredentials : true
         }
         )
         setTournaments(response.data)

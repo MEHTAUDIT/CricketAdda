@@ -22,7 +22,6 @@ import {
 import { Label } from "../ui/label";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { useSelector } from "react-redux";
 
 export default function AddTeam(props: any) {
   // const [ teamForm, setTeamForm ] = useState({
@@ -36,8 +35,7 @@ export default function AddTeam(props: any) {
   //     [e.target.name]: e.target.value,
   //   });
   // };
-  const user = useSelector((state: any) => state.user.user) || null;
-
+  
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     try {
@@ -45,9 +43,6 @@ export default function AddTeam(props: any) {
         `http://localhost:8080/api/tournament/${props.tournament_id}/addteam/${teamId}`,
 
         {
-          headers: {
-            Authorization: `Bearer ${user?.jwtToken}`,
-          },
           withCredentials: true,
         }
 
@@ -79,7 +74,7 @@ export default function AddTeam(props: any) {
   const fetchTeams = async () => {
     console.log("fetching teams");
     const response = await axios.get(
-      `http://localhost:8080/api/teams`,
+      `http://localhost:8080/api/teams`, {withCredentials : true}
     );
     setTeams(response.data);
    

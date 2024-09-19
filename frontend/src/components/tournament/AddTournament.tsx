@@ -13,6 +13,7 @@ export default function () {
     tournament_name: " ",
     tournament_type: " ",
     start_date: " ",
+    owner_email: " ",
   });
 
   const user = useSelector((state: any) => state.user.user) || null;
@@ -22,11 +23,18 @@ export default function () {
   const handleSubmit = async ( e : any) => {
     e.preventDefault()
     // console.log(form);
+    setForm({
+      ...form,
+      owner_email: user.email,
+    });
+
     try{
        await axios.post('http://localhost:8080/api/tournament' , form , 
-       {  headers: {
-        Authorization: `Bearer ${user?.jwtToken}`
-        }
+       {  
+          withCredentials : true,
+          headers : {
+            'Content-Type' : 'application/json'
+          },
       }
        )
       toast.success('Tournament Created')
